@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency management
+Pipfile.lock
+poetry.lock
+
+# Log files
+*.log
+
+# Sensitive information
+.env
