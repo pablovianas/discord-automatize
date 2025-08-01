@@ -137,7 +137,6 @@ async def verificar(interaction: discord.Interaction):
         "Se seu e-mail for encontrado no sistema, você terá acesso a todos os canais dessa comunidade exclusiva!\n\n"
         "Qualquer dúvida ou dificuldade entre em contato com o nosso suporte no canal suporte-ao-aluno.\n\n",
         view=view,
-        ephemeral=True,
     )
 
 
