@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from app.db.db import check_if_user_exists, create_connection, save_user
 from app.external_api.cademi import get_user_data
 from app.utils.utils import manage_user
+import server
 
 load_dotenv()
 
@@ -147,4 +148,5 @@ bot.tree.add_command(verificar)
 if DISCORD_BOT_TOKEN is None:
     raise ValueError("O token do Discord não foi encontrado. Verifique a variável de ambiente DISCORD_BOT_TOKEN.")
 
+server.keep_alive()
 bot.run(DISCORD_BOT_TOKEN)
