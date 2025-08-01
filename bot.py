@@ -15,6 +15,8 @@ load_dotenv()
 # Configura o bot com as intents necessárias
 intents = discord.Intents.default()
 intents.guilds = True
+intents.members = True  # Necessário para gerenciar membros e roles
+intents.presences = True  # Se precisar de acesso a presenças
 intents.message_content = True  # Se precisar de acesso ao conteúdo de mensagens
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -41,11 +43,19 @@ async def on_ready():
 # Evento para atribuir a role "noob" ao entrar
 @bot.event
 async def on_member_join(member):
+    print(f"Detectado novo membro: {member.name}#{member.discriminator}")
     guild = member.guild
     noob_role = discord.utils.get(guild.roles, id=DISCORD_NOOB_ROLE_ID)
     if noob_role:
-        await member.add_roles(noob_role)
-        print(f"Role 'noob' atribuída a {member.name}#{member.discriminator}")
+        try:
+            await member.add_roles(noob_role)
+            print(f"Role 'noob' atribuída a {member.name}#{member.discriminator}")
+        except discord.Forbidden:
+            print("Erro: O bot não tem permissão para atribuir roles.")
+        except discord.HTTPException as e:
+            print(f"Erro ao atribuir role: {e}")
+    else:
+        print(f"Role com ID {DISCORD_NOOB_ROLE_ID} não encontrada.")
 
 
 # Classe para o modal do formulário
